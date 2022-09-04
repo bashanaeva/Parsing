@@ -1,1 +1,47 @@
-'My Project' 
+
+## 1. Посмотреть документацию к API GitHub,
+## разобраться как вывести список репозиториев для конкретного пользователя, сохранить JSON-вывод в файле *.json.
+
+
+
+import requests
+from pprint import pprint
+import json
+
+
+
+# headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'}
+# url = 'https://api.github.com/users/bashanaeva/repos'
+# response = requests.get(url)
+# j_data = response.json()
+# repos = [j_data[i]['name'] for i in range(len(j_data))]
+# pprint(j_data)
+#
+# with open('repos.json','w', encoding='utf-8') as f:
+#      json.dumps(repos, f)
+
+
+## Задание 2  API вконтакте (https://vk.com/dev/first_guide).
+## Сделайте запрос, чтобы получить список всех сообществ на которые вы подписаны.
+
+##не смогла разобраться с выводом списка сообществ,поняла лишь как вывести названия постов.
+# №Через вк создала приложение для парсинга инфы и получила токен приложения.
+
+token = 'f64ce99df64ce99df64ce99d5df631adeaff64cf64ce99d948d64ba1db795aff08ba4db' #токен с созданного приложения в вк
+domain = 'super_books'
+version = 5.92
+
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'}
+
+response = requests.get('https://api.vk.com/method/wall.get',
+                        params={
+                            'access_token':  token,
+                            'v': version,
+                            'domain': domain
+                        }
+
+                        )
+j_data = response.json()
+for item in j_data['response']['items']:
+  print('в группе содержатся:', item['text'])
+  
